@@ -10,15 +10,16 @@ namespace ImageProcessor.Extensions
     {
         public static void PrintFunctional()
         {
-            Console.WriteLine("Введите номер необходимой команды (1,2,3 или 4):");
+            Console.WriteLine("Введите номер необходимой команды (1,2,3,4 или 5):");
             Console.WriteLine("1.Переименовать изображения в соответствии с датой сьемки");
             Console.WriteLine("2.Добавить на изображение отметку, когда фото было сделано");
             Console.WriteLine("3.Сортировка изображений по папкам по годам");
             Console.WriteLine("4.Сортировка изображений по папкам по месту сьемки");
-            
+            Console.WriteLine("5.Выход!!!");
+
         }
 
-        public static string ReadUserInput()
+        public static string GetUserInput()
         {
             return Console.ReadLine();
         }
@@ -32,5 +33,7 @@ namespace ImageProcessor.Extensions
         {
             Console.WriteLine("Введите путь к папке изображений (с:\\images\\):");
         }
+
+        
     }
 }
