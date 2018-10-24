@@ -22,25 +22,15 @@ namespace ImageProcessor
             }
             var directoryInfo = new DirectoryInfo(sourcePath);
             //var fullParentName = Directory.GetParent(sourcePath).FullName;                    разобраться с путями!!!
-            var destinationPath = directoryInfo.FullName + "_rename_images".ToUpper();
-            if (!Directory.Exists(destinationPath)) Directory.CreateDirectory(destinationPath);
-            var files = Directory.GetFiles(sourcePath);
-            foreach (var file in files)
+            var listFiles = Directory.GetFiles(sourcePath,"*.jp*g",SearchOption.AllDirectories);
+            foreach (var file in listFiles)
             {
-                //Console.WriteLine(ImageProperty.GetDateFromImage(file).Year);
-                var extensionOfFile = System.IO.Path.GetExtension(file);
-                if (extensionOfFile.Contains(".jpg") || extensionOfFile.Contains(".jpeg"))
-                {
-                    var outputFile = destinationPath + "\\" +
-                                     System.IO.Path.GetFileNameWithoutExtension(file) + "_" +
-                                     ImageProperty.GetDateFromImage(file).ToString("yyyy-MM-dd") +
-                                     extensionOfFile;
-                    File.Copy(file, outputFile);
-                }
-
+                var changedDirName = Path.GetDirectoryName(file).Replace(sourcePath, sourcePath + "_rename_images");
+                if(!Directory.Exists(changedDirName)) Directory.CreateDirectory(changedDirName);
+                var outputFile = changedDirName + "\\" + Path.GetFileNameWithoutExtension(file) + "_" + ImageProperty.GetDateFromImage(file).ToString("yyyy-MM-dd") + Path.GetExtension(file);
+                File.Copy(file, outputFile, true);
             }
-
-            Exit:;
+        Exit:;
 
         }
     }

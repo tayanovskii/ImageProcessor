@@ -23,29 +23,25 @@ namespace ImageProcessor
             }
             var directoryInfo = new DirectoryInfo(sourcePath);
             //var fullParentName = Directory.GetParent(sourcePath).FullName;                    разобраться с путями!!!
-            var destinationPath = directoryInfo.FullName + "_add_Date_images".ToUpper();
-            if (!Directory.Exists(destinationPath)) Directory.CreateDirectory(destinationPath);
-            var files = Directory.GetFiles(sourcePath);
-            foreach (var file in files)
+            var listFiles = Directory.GetFiles(sourcePath, "*.jp*g", SearchOption.AllDirectories);
+            foreach (var file in listFiles)
             {
-                var extensionOfFile = System.IO.Path.GetExtension(file);
-                if (extensionOfFile.Contains(".jpg") || extensionOfFile.Contains(".jpeg"))
+                var changedDirName = Path.GetDirectoryName(file).Replace(sourcePath, sourcePath + "_write date on photo");
+                if (!Directory.Exists(changedDirName)) Directory.CreateDirectory(changedDirName);
+                var outputFile = changedDirName + "\\" + Path.GetFileName(file);
+                var dateFromImage = ImageProperty.GetDateFromImage(file).ToString("MM-dd-yyyy HH:mm");
+                var image = Image.FromFile(file);
+                using (var graphics = Graphics.FromImage(image))
                 {
-                    var dateFromImage = ImageProperty.GetDateFromImage(file).ToString("MM-dd-yyyy HH:mm");
-                    var nameOfFile = new FileInfo(file).Name;
-                    var image = Image.FromFile(file);
-                    using(var graphics = Graphics.FromImage(image))
+                    using (var arialFont = new Font("Arial", 80))
                     {
-                        using (var arialFont = new Font("Arial", 80))
-                        {
-                            graphics.DrawString(dateFromImage, arialFont, Brushes.White, new System.Drawing.Point(image.Width - 800, image.Height - 200));
-                        }
+                        graphics.DrawString(dateFromImage, arialFont, Brushes.White, new System.Drawing.Point(image.Width - 800, image.Height - 200));
                     }
-                    image.Save(destinationPath+"\\"+nameOfFile);
                 }
-            }
+                image.Save(outputFile);
 
-            Exit:;
+            }
+        Exit:;
         }
     }
 }
