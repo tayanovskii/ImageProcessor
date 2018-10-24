@@ -12,14 +12,14 @@ namespace ImageProcessor.Extensions
 {
     class ImageProperty
     {
-        private static readonly Regex _Regex = new Regex(":");
+        private static readonly Regex DataRegex = new Regex(":");
         public static DateTime GetDateFromImage(string path)
         {
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (var myImage = Image.FromStream(fs, false, false))
             {
                 var propItem = myImage.GetPropertyItem(36867);
-                var dateTaken = _Regex.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+                var dateTaken = DataRegex.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
                 return DateTime.Parse(dateTaken);
             }
         }

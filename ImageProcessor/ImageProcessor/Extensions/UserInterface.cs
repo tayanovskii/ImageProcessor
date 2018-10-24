@@ -18,22 +18,9 @@ namespace ImageProcessor.Extensions
             Console.WriteLine("5.Выход!!!");
 
         }
-
-        public static string GetUserInput()
-        {
-            return Console.ReadLine();
-        }
-
-        public static short UserInputToInt(string userInput)
+        public static short InputStringToInt(string userInput)
         {
             return short.TryParse(userInput, out var userInputToInt) ? userInputToInt : (short) 0;
         }
-
-        public static void PrintRequestPath()
-        {
-            Console.WriteLine("Введите путь к папке изображений (с:\\images\\):");
-        }
-
-        
     }
 }
