@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,19 @@ namespace ImageProcessor.Extensions
         public static short InputStringToInt(string userInput)
         {
             return short.TryParse(userInput, out var userInputToInt) ? userInputToInt : (short) 0;
+        }
+
+        public static string GetSourcePath()
+        {
+            Console.WriteLine("Введите путь к папке изображений (с:\\temp\\images):");
+            var sourcePath = Console.ReadLine();
+            if (!Directory.Exists(sourcePath))
+            {
+                Console.WriteLine("Некорректный путь!");
+                sourcePath = null;
+            }
+
+            return sourcePath;
         }
     }
 }

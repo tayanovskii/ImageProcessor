@@ -14,7 +14,7 @@ namespace ImageProcessor
             {
                 case 1: return new RenameByDateProcessor();
                 case 2: return new AddDateProcessor();
-                case 3:
+                case 3: return new SortByDateProcessor();
 
                 default:
                     return null;

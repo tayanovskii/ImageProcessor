@@ -27,7 +27,11 @@ namespace ImageProcessor
                         FabricProcessors.Get(2).Start();
                         break;
                     }
-                    case 3: break;
+                    case 3:
+                    {
+                        FabricProcessors.Get(3).Start();
+                        break;
+                    }
                     case 4: break;
                     case 5:
                     {

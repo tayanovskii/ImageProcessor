@@ -13,15 +13,8 @@ namespace ImageProcessor
     {
         public override void Start()
         {
-
-            Console.WriteLine("Введите путь к папке изображений (с:\\temp\\images):");
-            var sourcePath = Console.ReadLine();
-            if (!Directory.Exists(sourcePath))
-            {
-                Console.WriteLine("Некорректный путь!");
-                goto Exit;
-            }
-            var directoryInfo = new DirectoryInfo(sourcePath);
+            var sourcePath = UserInterface.GetSourcePath();
+            if (sourcePath == null) return;
             //var fullParentName = Directory.GetParent(sourcePath).FullName;                    разобраться с путями!!!
             var listFiles = Directory.GetFiles(sourcePath, "*.jp*g", SearchOption.AllDirectories);
             foreach (var file in listFiles)
@@ -39,9 +32,7 @@ namespace ImageProcessor
                     }
                 }
                 image.Save(outputFile);
-
             }
-        Exit:;
         }
     }
 }
