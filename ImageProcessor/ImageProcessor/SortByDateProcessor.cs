@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using ImageProcessor.Extensions;
 
 namespace ImageProcessor
 {
-    class SortByDateProcessor : Processor
+    internal class SortByDateProcessor : Processor
     {
         public override void Start()
         {
             var sourcePath = UserInterface.GetSourcePath();
             if (sourcePath == null) return;
-            //var fullParentName = Directory.GetParent(sourcePath).FullName;                    разобраться с путями!!!
             var listFiles = Directory.GetFiles(sourcePath, "*.jp*g", SearchOption.AllDirectories);
             foreach (var file in listFiles)
             {

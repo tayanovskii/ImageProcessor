@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using ImageProcessor.Extensions;
 
 namespace ImageProcessor
@@ -14,12 +13,11 @@ namespace ImageProcessor
                 UserInterface.PrintFunctional();
                 var userInput = Console.ReadLine();
                 var userInputToInt = UserInterface.InputStringToInt(userInput);
-               
                 switch (userInputToInt)
                 {
                     case 1:
                     {
-                      FabricProcessors.Get(1).Start();
+                        FabricProcessors.Get(1).Start();
                         break;
                     }
                     case 2:
